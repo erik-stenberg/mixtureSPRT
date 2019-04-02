@@ -1,19 +1,3 @@
-#' S3 methods 
-
-##################
-#### Printing ####
-##################
-
-print.mSPRT <- function(x,...){
-  cat("Decision: ", x$decision,"\n")
-  cat(x$text)
-}
-
-
-##################
-###### Plot ######
-##################
-
 plot.mSPRT <- function(x){
   if (requireNamespace("ggplot2", quietly = TRUE)) {
     xp <- as.data.frame(x$spr)
