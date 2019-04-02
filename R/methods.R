@@ -30,7 +30,7 @@ plot.mSPRT <- function(x){
                              paste0("Null Hypothesis Rejected After ",x$n.rejection, " Observations"),
                              paste0("Null Hypothesis Accepted")))  } 
   else {
-    plot(ts(x$spr))
+    ###
   }
  
 }
