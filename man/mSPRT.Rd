@@ -24,3 +24,6 @@ The likelihood ratio
 \description{
 Perform mixture Sequential Probability Ratio Test
 }
+\references{
+\emph{Johari, R., Koomen, P., Pekelis, L. & Walsh, D. 2017, "Peeking at A/B Tests: Why it matters, and what to do about it", ACM, , pp. 1517}
+}
