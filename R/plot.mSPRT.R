@@ -1,3 +1,4 @@
+#' @export
 plot.mSPRT <- function(x){
   if (requireNamespace("ggplot2", quietly = TRUE)) {
     xp <- as.data.frame(x$spr)
