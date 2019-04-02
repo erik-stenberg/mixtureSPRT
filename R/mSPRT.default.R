@@ -1,5 +1,9 @@
 #' Perform mixture Sequential Probability Ratio Test
 #'
+#'
+#' \name{mSPRT.default}
+#' \alias{mSPRT.default}
+#' \alias{mSPRT}
 #' @param x,y Numeric vectors
 #' @param sigma Population standard deviation
 #' @param theta Hypothesised difference between \code{x} and \code{y}
