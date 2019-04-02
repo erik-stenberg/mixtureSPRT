@@ -3,5 +3,5 @@
 S3method(mSPRT,default)
 S3method(plot,mSPRT)
 S3method(print,mSPRT)
-
 export(calcTau)
+export(mSPRT)

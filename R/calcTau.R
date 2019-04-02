@@ -9,5 +9,5 @@
 calcTau <- function(alpha, sigma, truncation) {
   is.numeric(alpha) & alpha > 0 & alpha < 1 || stop("Alpha must be between 0 and 1")
   b <- (2*log(alpha^(-1)))/(truncation*sigma^2)^(1/2)
-  return(round(sigma^2 *( pnorm(-b) / ((1/b)*dnorm(b) - pnorm(-b)) ),2))
+  return(round(sigma^2 *( stats::pnorm(-b) / ((1/b)*stats::dnorm(b) - stats::pnorm(-b)) ),2))
 }
