@@ -10,7 +10,7 @@
 #' @export
 
 # Validations ------------
-mSPRT <- function(x,y,sigma,tau,theta=0,distribution="normal",alpha=0.05){
+mSPRT.default <- function(x,y,sigma,tau,theta=0,distribution="normal",alpha=0.05){
   # x,y
   is.numeric(x) & is.numeric(y) || stop("x and y must be numeric vectors")
   !is.null(x) & !is.null(y) || stop("x and y cannot be empty")
