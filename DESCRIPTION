@@ -1,0 +1,12 @@
+Package: mixtureSPRT
+Type: Package
+Title: What the Package Does in One 'Title Case' Line
+Version: 1.0
+Date: 2019-04-02
+Author: Erik Stenberg
+Maintainer: Erik Stenberg <erik.stnb@gmail.com>
+Description: Perfoms mixture Sequential Probability Ratio Test for normally distributed data.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.0)
+LinkingTo: Rcpp
+RoxygenNote: 6.1.1
