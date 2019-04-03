@@ -1,4 +1,5 @@
 #' @importFrom ggplot2 ggplot geom_line geom_hline aes labs theme_minimal xlab ylab ylim
+#' @importFrom graphics plot
 #' @export
 
 plot.mSPRT <- function(x, ...) {
