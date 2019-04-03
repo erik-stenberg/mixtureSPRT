@@ -14,6 +14,7 @@ plot.mSPRT <- function(x, ...) {
     plot(stats::ts(xp),
          xlab = "Observations Collected",
          ylab = "Probability Ratio")
+    abline(h = (x$alpha)^(-1))
     #colnames(xp) <- "spr"
     #ggplot(xp, aes(y = spr, x = 1:nrow(xp)))+
      # geom_line()+
