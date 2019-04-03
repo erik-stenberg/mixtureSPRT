@@ -1,5 +1,4 @@
 #' @importFrom ggplot2 ggplot geom_line geom_hline aes labs theme_minimal xlab ylab ylim
-#' @importFrom graphics plot
 #' @export
 
 plot.mSPRT <- function(x, ...) {
@@ -21,7 +20,7 @@ plot.mSPRT <- function(x, ...) {
     #  labs(title="Mixture Sequential Probability Ratio Test",
     #                subtitle = ifelse(x$n.rejection < nrow(xp),
     #                         paste0("Null Hypothesis Rejected After ",x$n.rejection, " Observations"),
-    #                         paste0("Null Hypothesis Accepted")))  
+    #                         paste0("Null Hypothesis Accepted"))
     } 
   else {
     print("ggplot2 required for plot")
