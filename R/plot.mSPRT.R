@@ -1,5 +1,3 @@
-#' @param x An object of class \code{mSPRT}
-#' @param ... other
 #' @importFrom ggplot2 ggplot geom_line geom_hline aes labs theme_minimal xlab ylab ylim
 
 plot.mSPRT <- function(x, ...) {
