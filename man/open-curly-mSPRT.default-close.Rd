@@ -17,6 +17,8 @@
 
 \item{theta}{Hypothesised difference between \code{x} and \code{y}}
 
+\item{distribution}{The desired distribution. Currently, only \code{normal} is implemented.}
+
 \item{alpha}{Significance level}
 }
 \value{

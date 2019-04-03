@@ -7,6 +7,6 @@ Author: Erik Stenberg
 Maintainer: Erik Stenberg <erik.stnb@gmail.com>
 Description: Perfoms mixture Sequential Probability Ratio Test for normally distributed data.
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.0)
+Imports: Rcpp (>= 1.0.0), ggplot2
 LinkingTo: Rcpp
 RoxygenNote: 6.1.1
