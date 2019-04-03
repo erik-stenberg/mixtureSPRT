@@ -3,7 +3,7 @@
 \alias{mixtureSPRT}
 \docType{package}
 \title{
-  Performs mixture Sequential Probability Ratio test
+  mixture Sequential Probability Ratio test
 }
 \description{
   Perform mixture Sequential Probability Ratio Test (mSPRT).
