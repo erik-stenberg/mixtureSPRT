@@ -32,7 +32,4 @@ plot.mSPRT <- function(x, ...) {
   {
     print("ggplot2 required for plot")
   }
-  
 }
-
-
