@@ -72,7 +72,7 @@ mSPRT.default <- function(x,y,sigma,tau,theta=0,distribution="normal",alpha=0.05
     length(z)
   }
   
-  decision <- ifelse(n.rejection < 100, paste0("Accept H1"), paste0("Accept H0"))
+  decision <- ifelse(n.rejection < length(z), paste0("Accept H1"), paste0("Accept H0"))
   text <- paste0("Decision made after ",n.rejection," observations were collected")
   
   
