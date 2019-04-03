@@ -6,6 +6,7 @@
 #' @import ggplot2
 
 plot.mSPRT <- function(x = mSPRT, ...) {
+
   if (requireNamespace("ggplot2", quietly = TRUE)) {
     xp <- as.data.frame(.data$spr)
     colnames(xp) <- "spr"
