@@ -1,14 +1,13 @@
-#' Plot mSPRT
-#'
 #' @param x An object of class \code{mSPRT}
 #' @param ... other
-#' @export
 #' @importFrom ggplot2 ggplot geom_line geom_hline aes labs theme_minimal xlab ylab ylim
 
 plot.mSPRT <- function(x, ...) {
 
   if (requireNamespace("ggplot2", quietly = TRUE)) {
+
     xp <- as.data.frame(mSPRT$spr)
+
     colnames(xp) <- "spr"
     ggplot(xp, aes(y = spr, x = 1:nrow(xp)))+
       geom_line()+
