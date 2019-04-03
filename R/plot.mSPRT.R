@@ -4,7 +4,7 @@ plot.mSPRT <- function(x, ...) {
 
   if (requireNamespace("ggplot2", quietly = TRUE)) {
 
-    xp <- as.data.frame(mSPRT$spr)
+    xp <- as.data.frame(x$spr)
 
     colnames(xp) <- "spr"
     ggplot(xp, aes(y = spr, x = 1:nrow(xp)))+
