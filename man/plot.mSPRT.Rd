@@ -4,7 +4,7 @@
 \alias{plot.mSPRT}
 \title{Plot mSPRT}
 \usage{
-\method{plot}{mSPRT}(x = mSPRT, ...)
+\method{plot}{mSPRT}(x, ...)
 }
 \arguments{
 \item{x}{An object of class \code{mSPRT}}

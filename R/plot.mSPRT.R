@@ -3,12 +3,12 @@
 #' @param x An object of class \code{mSPRT}
 #' @param ... other
 #' @export
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot geom_line geom_hline aes labs theme_minimal xlab ylab ylim
 
-plot.mSPRT <- function(x = mSPRT, ...) {
+plot.mSPRT <- function(x, ...) {
 
   if (requireNamespace("ggplot2", quietly = TRUE)) {
-    xp <- as.data.frame(.data$spr)
+    xp <- as.data.frame(mSPRT$spr)
     colnames(xp) <- "spr"
     ggplot(xp, aes(y = spr, x = 1:nrow(xp)))+
       geom_line()+
@@ -22,7 +22,7 @@ plot.mSPRT <- function(x = mSPRT, ...) {
                              paste0("Null Hypothesis Rejected After ",x$n.rejection, " Observations"),
                              paste0("Null Hypothesis Accepted")))  } 
   else {
-    ###
+    print("ggplot2 required for plot")
   }
  
 }
