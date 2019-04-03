@@ -19,6 +19,11 @@ tau Optimal mixture variance \eqn{\tau} for mSPRT.
 \description{
 Calculate Mixture Variance
 }
+\section{Details}{
+
+Mixture variance \deqn{\tau^2 =  \sigma^2 \frac{\Phi(-b)}{\frac{1}{b}\phi(b)-\Phi(-b)}.}
+}
+
 \references{
 \emph{Johari, R., Koomen, P., Pekelis, L. & Walsh, D. 2017, "Peeking at A/B Tests: Why it matters, and what to do about it", ACM, , pp. 1517}
 }

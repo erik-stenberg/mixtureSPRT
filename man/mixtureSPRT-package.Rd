@@ -6,11 +6,10 @@
   Performs mixture Sequential Probability Ratio test
 }
 \description{
-  A more detailed description of what the package does. A length
-  of about one to five lines is recommended.
+  Perform mixture Sequential Probability Ratio Test (mSPRT).
 }
 \details{
-  \code{mixtureSPRT} includes two functions, \code{mSPRT} for the actual test and \code{calcTau} which calculated a mixture variance based on significance level, population variance andand desired truncation time 
+  This package implements the mixture Sequential Probability Ratio Test (mSPRT) with normally distributed data and normal mixture distribution, as described in \emph{"Peeking at A/B Tests: Why it matters, and what to do about it"}. It containts a function for actual calculation of the test statistic, as well as plot and print methods and decision. It also contains a function to calculate the optimal mixture variance given desried significance level, population variance and truncation time of the test.
 }
 \author{
 Erik Stenberg
@@ -18,7 +17,7 @@ Erik Stenberg
 Maintainer: Erik Stenberg <erik.stnb@gmail.com>
 }
 \references{
-  \emph{Johari, R., Koomen, P., Pekelis, L. & Walsh, D. 2017, "Peeking at A/B Tests: Why it matters, and what to do about it", ACM, , pp. 1517}
+  \emph{Johari, R., Koomen, P., Pekelis, L. & Walsh, D. 2017, "Peeking at A/B Tests: Why it matters, and what to do about it", ACM, pp. 1517}
 }
 \keyword{ package }
 \seealso{

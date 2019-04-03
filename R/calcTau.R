@@ -5,6 +5,8 @@
 #' @param truncation Desired truncation time for mSPRT
 #' @return tau Optimal mixture variance \eqn{\tau} for mSPRT.
 #' @references \emph{Johari, R., Koomen, P., Pekelis, L. & Walsh, D. 2017, "Peeking at A/B Tests: Why it matters, and what to do about it", ACM, , pp. 1517} 
+#' @section Details:
+#' Mixture variance \deqn{\tau^2 =  \sigma^2 \frac{\Phi(-b)}{\frac{1}{b}\phi(b)-\Phi(-b)}.}
 #' @export
 calcTau <- function(alpha, sigma, truncation) {
   is.numeric(alpha) & alpha > 0 & alpha < 1 || stop("Alpha must be between 0 and 1")

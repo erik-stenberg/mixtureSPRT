@@ -8,6 +8,9 @@
 #' @param distribution The desired distribution. Currently, only \code{normal} is implemented.
 #' @return The likelihood ratio
 #' @references \emph{Johari, R., Koomen, P., Pekelis, L. & Walsh, D. 2017, "Peeking at A/B Tests: Why it matters, and what to do about it", ACM, , pp. 1517}
+#' @section Details:
+#' With normal data and normal prior, the closed form solution of the probability ratio after \eqn{n} observations have been collected is:
+#' \deqn{\tilde{\Lambda}_n = \sqrt{\frac{V_n}{V_n + n\tau^2}}\exp{\left(\frac{n^2\tau^2(\bar{Y}_n - \bar{X}_n-\theta_0)^2}{2V_n(V_n+n\tau^2)}\right)}.}
 #' @export
 #' 
 mSPRT <-
