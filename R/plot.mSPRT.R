@@ -1,5 +1,9 @@
+#' plot.mSPRT
+#' 
 #' @importFrom ggplot2 ggplot geom_line geom_hline aes labs theme_minimal xlab ylab ylim
 #' @importFrom graphics plot
+#' @param x An object of class \code{mSPRT}
+#' @param ... Further arguments
 #' @export
 
 plot.mSPRT <- function(x, ...) {
@@ -28,3 +32,4 @@ plot.mSPRT <- function(x, ...) {
   }
  
 }
+
