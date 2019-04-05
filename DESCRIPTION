@@ -5,7 +5,7 @@ Version: 1.0
 Date: 2019-04-02
 Author: Erik Stenberg
 Maintainer: Erik Stenberg <erik.stnb@gmail.com>
-Description: Perfoms mixture Sequential Probability Ratio Test for normally distributed data.
+Description: Perfoms mixture Sequential Probability Ratio Test for normally and Bernoulli distributed data.
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.0), ggplot2
 LinkingTo: Rcpp
