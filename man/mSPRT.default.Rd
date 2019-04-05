@@ -16,7 +16,7 @@
 
 \item{theta}{Hypothesised difference between \code{x} and \code{y}}
 
-\item{distribution}{The desired distribution. Currently, only \code{normal} is implemented.}
+\item{distribution}{The desired distribution, \code{normal} or \code{bernoulli}}
 
 \item{alpha}{Significance level}
 }

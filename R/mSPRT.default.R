@@ -44,7 +44,7 @@ mSPRT.default <- function(x,y,sigma,tau,theta=0,distribution="normal",alpha=0.05
   ########
   # FUNC #
   ########
-  tau  = 0.26
+
   
   
   #################
@@ -56,6 +56,13 @@ mSPRT.default <- function(x,y,sigma,tau,theta=0,distribution="normal",alpha=0.05
     for(i in 1:length(z))
     out[i] <- sqrt((2*sigma^2)/(2*sigma^2 + i *tau^2)) * exp(((i)^2*tau^2*(mean(z[1:i]) - theta)^2) / (4*sigma^2*(2*sigma^2 + i*tau^2)))  
   }
+  
+  if(distribution == "bernoulli"){
+    for(i in 1:length(z))
+      Vn <- mean(x) * (1-mean(x)) + mean(y) * (1-mean(y))
+      out[i] <- sqrt((Vn)/(Vn + i*tau^2)) * exp(((i)^2*tau^2*(mean(z[1:i]) - theta)^2) / (2*Vn*(Vn + i*tau^2)))  
+  }
+  
   #################
   
   
