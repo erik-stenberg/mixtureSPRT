@@ -22,7 +22,10 @@ mSPRT.default <- function(x,y,sigma,tau,theta=0,distribution="normal",alpha=0.05
   }
   
   # sigma
-  is.numeric(sigma) || stop("sigma must be numeric")
+  if(distribution=="normal"){
+    is.numeric(sigma) || stop("sigma must be numeric")  
+  }
+  
   
   # theta
   is.numeric(theta) || stop("theta must be numeric")
@@ -58,9 +61,10 @@ mSPRT.default <- function(x,y,sigma,tau,theta=0,distribution="normal",alpha=0.05
   }
   
   if(distribution == "bernoulli"){
-    for(i in 1:length(z))
+    for(i in 1:length(z)){
       Vn <- mean(x) * (1-mean(x)) + mean(y) * (1-mean(y))
       out[i] <- sqrt((Vn)/(Vn + i*tau^2)) * exp(((i)^2*tau^2*(mean(z[1:i]) - theta)^2) / (2*Vn*(Vn + i*tau^2)))  
+    }
   }
   
   #################
