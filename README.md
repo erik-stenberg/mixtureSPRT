@@ -1,11 +1,3 @@
-<<<<<<< HEAD
----
-title: "mixtureSPRT"
----
-
-
-
-=======
 # mixtureSPRT
 >>>>>>> 4575064ac0e38a69f3fa93eb114166a8a6bb75b1
 mixtureSPRT is a package for performing mixture Sequential Probability Ratio tests. It includes functions for calculating mixing variance and test statistic, as well as methods for plotting and printing. It also contains an option carry out the calculations in C++ as it reduced runtime substantially. This is particularly useful when many tests are performed to see for example sampling distributions or compare the mSPRT to other tests. 
