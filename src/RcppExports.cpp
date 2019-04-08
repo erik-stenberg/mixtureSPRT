@@ -5,9 +5,9 @@
 
 using namespace Rcpp;
 
-// testing
-NumericVector testing(Rcpp::NumericVector x, Rcpp::NumericVector y, double sigma, double tau, double theta, String distribution);
-RcppExport SEXP _mixtureSPRT_testing(SEXP xSEXP, SEXP ySEXP, SEXP sigmaSEXP, SEXP tauSEXP, SEXP thetaSEXP, SEXP distributionSEXP) {
+// cppmSPRT
+NumericVector cppmSPRT(Rcpp::NumericVector x, Rcpp::NumericVector y, double sigma, double tau, double theta, String distribution);
+RcppExport SEXP _mixtureSPRT_cppmSPRT(SEXP xSEXP, SEXP ySEXP, SEXP sigmaSEXP, SEXP tauSEXP, SEXP thetaSEXP, SEXP distributionSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -17,13 +17,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type tau(tauSEXP);
     Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
     Rcpp::traits::input_parameter< String >::type distribution(distributionSEXP);
-    rcpp_result_gen = Rcpp::wrap(testing(x, y, sigma, tau, theta, distribution));
+    rcpp_result_gen = Rcpp::wrap(cppmSPRT(x, y, sigma, tau, theta, distribution));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_mixtureSPRT_testing", (DL_FUNC) &_mixtureSPRT_testing, 6},
+    {"_mixtureSPRT_cppmSPRT", (DL_FUNC) &_mixtureSPRT_cppmSPRT, 6},
     {NULL, NULL, 0}
 };
 

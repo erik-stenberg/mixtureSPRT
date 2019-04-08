@@ -55,14 +55,32 @@ mSPRT.default <- function(x, y, sigma, tau, theta=0, distribution='normal', alph
   n <- length(x)
   z <- x-y
   
-  ### Cpp
+  ### Cpp 
   if(useCpp == T){
-    out <- mixtureSPRT::testing(x = x,
-                                y = y,
-                                sigma = sigma,
-                                tau = tau,
-                                theta = theta,
-                                distribution = distribution)
+    # Normal
+    if(distribution == "normal") {
+      out <- mixtureSPRT::cppmSPRT(x = x,
+                                   y = y,
+                                   sigma = sigma,
+                                   tau = tau,
+                                   theta = theta,
+                                   distribution = distribution)
+      
+      
+      # Bernoulli
+    } else if (distribution == "bernoulli") {
+      Vn <- mean(y) * (1 - mean(y)) + mean(x) * (1-mean(x))
+      sigma = sqrt(Vn/2)
+      out <- mixtureSPRT::cppmSPRT(x = x,
+                                   y = y,
+                                   sigma = sigma,
+                                   tau = tau,
+                                   theta = theta,
+                                   distribution = distribution)
+      
+      
+    }
+    
   } else if(useCpp == F){
     
     
@@ -81,7 +99,7 @@ mSPRT.default <- function(x, y, sigma, tau, theta=0, distribution='normal', alph
         out[i] <- sqrt((Vn)/(Vn + i*tau^2)) * exp(((i)^2*tau^2*(mean(z[1:i]) - theta)^2) / (2*Vn*(Vn + i*tau^2)))  
       }
     }
-    
+    out <- as.vector(out)
     #################
   }
   

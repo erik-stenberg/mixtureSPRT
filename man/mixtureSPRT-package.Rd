@@ -35,4 +35,5 @@ Maintainer: Erik Stenberg <erik.stnb@gmail.com>
 
        plot(m)
   }
+
 }

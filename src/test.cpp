@@ -1,4 +1,4 @@
-//' Calculate mixture Sequential Probability Ratio Test in Cpp
+//' Calculate mixture Sequential Probability Ratio Test in C++
 //'
 //' @param x,y Numeric vectors
 //' @param sigma Population standard deviation
@@ -7,7 +7,7 @@
 //' @param distribution The desired distribution.
 //' @param alpha Significance level
 //' @return The likelihood ratio
-//' @name testing
+//' @name cppmSPRT
 //' @export
 
 #include <Rcpp.h>
@@ -31,7 +31,7 @@ double meanC(NumericVector x) {
 
 
 // [[Rcpp::export]]
-NumericVector testing(Rcpp::NumericVector x, Rcpp::NumericVector y, double sigma, double tau, double theta=0, String distribution = "normal"){
+NumericVector cppmSPRT(Rcpp::NumericVector x, Rcpp::NumericVector y, double sigma, double tau, double theta=0, String distribution = "normal"){
   
   int n = x.size();
   NumericVector out(n);
@@ -39,7 +39,7 @@ NumericVector testing(Rcpp::NumericVector x, Rcpp::NumericVector y, double sigma
   for(int i = 0; i < n; ++i)
   {
     out[i]  = sqrt((2 * pow(sigma,2) / (2*pow(sigma,2) + (i+1) * pow(tau,2)))) * 
-      exp((pow((i+1),2)*pow(tau,2)*pow((meanC(x[Rcpp::Range(0,(i+1))])- meanC(y[Rcpp::Range(0,(i+1))]) - theta),2))/(4*pow(sigma,2)*(2*pow(sigma,2) + (i+1) * pow(tau,2))));
+      exp((pow((i+1),2)*pow(tau,2)*pow((meanC(x[Rcpp::Range(0,(i))])- meanC(y[Rcpp::Range(0,(i))]) - theta),2))/(4*pow(sigma,2)*(2*pow(sigma,2) + (i+1) * pow(tau,2))));
     
   }
   
