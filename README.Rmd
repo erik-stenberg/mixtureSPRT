@@ -1,6 +1,5 @@
 ---
 title: "mixtureSPRT"
-output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -12,6 +11,9 @@ mixtureSPRT is a package for performing mixture Sequential Probability Ratio tes
 - `calcTau()`
 - `mSPRT()`
 
+```{r,echo=F, include=F}
+library(mixtureSPRT)
+```
 
 
 ## Installation
@@ -23,20 +25,20 @@ devtools::install_github("shitoushan/mixtureSPRT")
 ## Usage
 
 ```{r}
-library(mixtureSPRT)
-    set.seed(12345)
-     n <- 10000
-     m <- mSPRT(x = rnorm(n),
-           y = rnorm(n, mean = 0.06),
-           sigma = 1,
-           tau =  calcTau(alpha = 0.05, sigma = 1, truncation = n),
-           theta = 0,
-           distribution = "normal",
-           alpha = 0.05)
-     
-     print(m)
-     plot(m)
-  
+library(microbenchmark)
+y <- rnorm(1000)
+x <- rnorm(1000)
+sigma = 1
+tau = calcTau(0.05,1,100)
+theta = 0
+distribution="normal"
+alpha=0.05
+
+
+m <- mSPRT(x, y, sigma, tau, useCpp = F)
+mcpp <-  mSPRT(x, y, sigma, tau, useCpp = T)
+
+microbenchmark(m,mcpp)
 ```
 
 

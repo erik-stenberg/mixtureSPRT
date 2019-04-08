@@ -1,6 +1,5 @@
 ---
 title: "mixtureSPRT"
-output: html_document
 ---
 
 
@@ -9,6 +8,7 @@ mixtureSPRT is a package for performing mixture Sequential Probability Ratio tes
 
 - `calcTau()`
 - `mSPRT()`
+
 
 
 
@@ -23,30 +23,28 @@ devtools::install_github("shitoushan/mixtureSPRT")
 
 
 ```r
-library(mixtureSPRT)
-    set.seed(12345)
-     n <- 10000
-     m <- mSPRT(x = rnorm(n),
-           y = rnorm(n, mean = 0.06),
-           sigma = 1,
-           tau =  calcTau(alpha = 0.05, sigma = 1, truncation = n),
-           theta = 0,
-           distribution = "normal",
-           alpha = 0.05)
-     
-     print(m)
+library(microbenchmark)
+y <- rnorm(1000)
+x <- rnorm(1000)
+sigma = 1
+tau = calcTau(0.05,1,100)
+theta = 0
+distribution="normal"
+alpha=0.05
+
+
+m <- mSPRT(x, y, sigma, tau, useCpp = F)
+mcpp <-  mSPRT(x, y, sigma, tau, useCpp = T)
+
+microbenchmark(m,mcpp)
 ```
 
 ```
-## Decision:  Accept H1 
-## Decision made after 4207 observations were collected
+## Unit: nanoseconds
+##  expr min lq   mean median   uq  max neval
+##     m  49 70 105.17   79.0 87.5 2606   100
+##  mcpp  43 66  87.03   76.5 88.0 1091   100
 ```
-
-```r
-     plot(m)
-```
-
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
 
 
 
@@ -75,10 +73,10 @@ microbenchmark(
 
 ```
 ## Unit: microseconds
-##                                         expr     min      lq     mean
-##     m <- mSPRT(x, y, sigma, tau, useCpp = F) 620.943 666.018 865.1712
-##  mcpp <- mSPRT(x, y, sigma, tau, useCpp = T) 244.179 291.176 351.4821
-##    median        uq      max neval
-##  705.6660 1113.3820 1339.248   100
-##  314.3025  433.9505  564.184   100
+##                                         expr     min       lq      mean
+##     m <- mSPRT(x, y, sigma, tau, useCpp = F) 583.583 915.1265 1248.7865
+##  mcpp <- mSPRT(x, y, sigma, tau, useCpp = T) 246.521 368.1525  451.4082
+##     median       uq      max neval
+##  1078.8535 1211.521 6446.875   100
+##   387.2655  467.846 2132.278   100
 ```
