@@ -6,7 +6,7 @@
 #' @param theta Hypothesised difference between \code{x} and \code{y}
 #' @param distribution The desired distribution.
 #' @param alpha Significance level
-#' @param useCpp Boolean. Use C++ for calculations? Useful for running many tests as it reduces runtime by 70 %
+#' @param useCpp Boolean. Use C++ for calculations? Useful for running many tests as it reduces runtime substantially
 #' @return The likelihood ratio
 #' @references \emph{Johari, R., Koomen, P., Pekelis, L. & Walsh, D. 2017, 'Peeking at A/B Tests: Why it matters, and what to do about it', ACM, , pp. 1517}
 #' @section Details:

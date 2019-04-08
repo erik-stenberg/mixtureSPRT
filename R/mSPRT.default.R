@@ -12,7 +12,7 @@
 #' 
 #' @useDynLib mixtureSPRT
 #' @importFrom Rcpp sourceCpp
-#' NULL
+NULL
 
 
 # Validations ------------
