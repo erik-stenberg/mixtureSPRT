@@ -2,16 +2,21 @@
 #'
 #' @param x,y Numeric vectors
 #' @param sigma Population standard deviation
-#' @param theta Hypothesised difference between \code{x} and \code{y}
 #' @param tau Mixture variance
-#' @param alpha Significance level
+#' @param theta Hypothesised difference between \code{x} and \code{y}
 #' @param distribution The desired distribution. Currently, only \code{normal} is implemented.
+#' @param alpha Significance level
 #' @return The likelihood ratio
 #' @references \emph{Johari, R., Koomen, P., Pekelis, L. & Walsh, D. 2017, "Peeking at A/B Tests: Why it matters, and what to do about it", ACM, , pp. 1517}
 #' @export
 #' 
+#' @useDynLib mixtureSPRT
+#' @importFrom Rcpp sourceCpp
+#' NULL
+
+
 # Validations ------------
-mSPRT.default <- function(x,y,sigma,tau,theta=0,distribution="normal",alpha=0.05){
+mSPRT.default <- function(x, y, sigma, tau, theta=0, distribution='normal', alpha=0.05, useCpp=F){
   # x,y
   is.numeric(x) & is.numeric(y) || stop("x and y must be numeric vectors")
   !is.null(x) & !is.null(y) || stop("x and y cannot be empty")
@@ -47,28 +52,38 @@ mSPRT.default <- function(x,y,sigma,tau,theta=0,distribution="normal",alpha=0.05
   ###########
   # FUNC #
   ###########
-
-  
-  
-  #################
-  out <- vector()
   n <- length(x)
   z <- x-y
-  out <- matrix(NA,length(z),1)
-  if(distribution == "normal"){
-    for(i in 1:length(z))
-    out[i] <- sqrt((2*sigma^2)/(2*sigma^2 + i *tau^2)) * exp(((i)^2*tau^2*(mean(z[1:i]) - theta)^2) / (4*sigma^2*(2*sigma^2 + i*tau^2)))  
-  }
   
-  if(distribution == "bernoulli"){
-    for(i in 1:length(z)){
-      Vn <- mean(x) * (1-mean(x)) + mean(y) * (1-mean(y))
-      out[i] <- sqrt((Vn)/(Vn + i*tau^2)) * exp(((i)^2*tau^2*(mean(z[1:i]) - theta)^2) / (2*Vn*(Vn + i*tau^2)))  
+  ### Cpp
+  if(useCpp == T){
+    out <- mixtureSPRT::testing(x = x,
+                                y = y,
+                                sigma = sigma,
+                                tau = tau,
+                                theta = theta,
+                                distribution = distribution)
+  } else if(useCpp == F){
+    
+    
+    
+    #################
+    
+    out <- matrix(NA,length(z))
+    if(distribution == "normal"){
+      for(i in 1:length(z))
+        out[i] <- sqrt((2*sigma^2)/(2*sigma^2 + i *tau^2)) * exp(((i)^2*tau^2*(mean(z[1:i]) - theta)^2) / (4*sigma^2*(2*sigma^2 + i*tau^2)))  
     }
+    
+    if(distribution == "bernoulli"){
+      for(i in 1:length(z)){
+        Vn <- mean(x) * (1-mean(x)) + mean(y) * (1-mean(y))
+        out[i] <- sqrt((Vn)/(Vn + i*tau^2)) * exp(((i)^2*tau^2*(mean(z[1:i]) - theta)^2) / (2*Vn*(Vn + i*tau^2)))  
+      }
+    }
+    
+    #################
   }
-  
-  #################
-  
   
   
   ##########
