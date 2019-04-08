@@ -1,7 +1,4 @@
----
-title: "mixtureSPRT"
----
-
+# mixtureSPRT
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -25,19 +22,17 @@ devtools::install_github("shitoushan/mixtureSPRT")
 ## Usage
 
 ```{r}
-library(microbenchmark)
-y <- rnorm(100)
-x <- rnorm(100)
-sigma = 1
-tau = calcTau(0.05,1,100)
-theta = 0
-distribution="normal"
-alpha=0.05
+    set.seed(1337)
+     n <- 10000
+     m <- mSPRT(x = rnorm(n),
+           y = rnorm(n, mean = 0.05),
+           sigma = 1,
+           tau =  calcTau(alpha = 0.05, sigma = 1, truncation = n),
+           theta = 0,
+           distribution = "normal",
+           alpha = 0.05)
 
-microbenchmark(
-  m <- mSPRT(x, y, sigma, tau, useCpp = F),
-  mcpp <-  mSPRT(x, y, sigma, tau, useCpp = T)
-  )
+       plot(m)
 ```
 
 
