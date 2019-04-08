@@ -4,8 +4,8 @@
 \alias{mSPRT.default}
 \title{Perform mixture Sequential Probability Ratio Test}
 \usage{
-\method{mSPRT}{default}(x, y, sigma, tau, theta = 0,
-  distribution = "normal", alpha = 0.05)
+mSPRT.default(x, y, sigma, tau, theta = 0, distribution = "normal",
+  alpha = 0.05)
 }
 \arguments{
 \item{x, y}{Numeric vectors}
@@ -16,7 +16,7 @@
 
 \item{theta}{Hypothesised difference between \code{x} and \code{y}}
 
-\item{distribution}{The desired distribution, \code{normal} or \code{bernoulli}}
+\item{distribution}{The desired distribution. Currently, only \code{normal} is implemented.}
 
 \item{alpha}{Significance level}
 }
@@ -27,5 +27,5 @@ The likelihood ratio
 Perform mixture Sequential Probability Ratio Test
 }
 \references{
-Johari, R., Koomen, P., Pekelis, L. & Walsh, D. 2017, "Peeking at A/B Tests: Why it matters, and what to do about it", ACM, , pp. 1517
+\emph{Johari, R., Koomen, P., Pekelis, L. & Walsh, D. 2017, "Peeking at A/B Tests: Why it matters, and what to do about it", ACM, , pp. 1517}
 }
