@@ -26,19 +26,18 @@ devtools::install_github("shitoushan/mixtureSPRT")
 
 ```{r}
 library(microbenchmark)
-y <- rnorm(1000)
-x <- rnorm(1000)
+y <- rnorm(100)
+x <- rnorm(100)
 sigma = 1
 tau = calcTau(0.05,1,100)
 theta = 0
 distribution="normal"
 alpha=0.05
 
-
-m <- mSPRT(x, y, sigma, tau, useCpp = F)
-mcpp <-  mSPRT(x, y, sigma, tau, useCpp = T)
-
-microbenchmark(m,mcpp)
+microbenchmark(
+  m <- mSPRT(x, y, sigma, tau, useCpp = F),
+  mcpp <-  mSPRT(x, y, sigma, tau, useCpp = T)
+  )
 ```
 
 
