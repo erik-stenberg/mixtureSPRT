@@ -1,5 +1,6 @@
 # mixtureSPRT
 
+
 mixtureSPRT is a package for performing mixture Sequential Probability Ratio tests. It includes functions for calculating mixing variance and test statistic, as well as methods for plotting and printing. It also contains an option carry out the calculations in C++ as it reduced runtime substantially. This is particularly useful when many tests are performed to see for example sampling distributions or compare the mSPRT to other tests. 
 
 - `calcTau()`
@@ -61,10 +62,10 @@ microbenchmark(
 
 ```
 ## Unit: microseconds
-##                                         expr     min        lq      mean
-##     m <- mSPRT(x, y, sigma, tau, useCpp = F) 812.872 1297.1905 1514.3622
-##  mcpp <- mSPRT(x, y, sigma, tau, useCpp = T) 284.802  331.2365  447.4111
-##     median        uq      max neval
-##  1438.0315 1638.7975 4170.441   100
-##   449.1175  504.2245  854.584   100
+##                                         expr     min       lq      mean
+##     m <- mSPRT(x, y, sigma, tau, useCpp = F) 628.662 714.1985 1048.1518
+##  mcpp <- mSPRT(x, y, sigma, tau, useCpp = T) 286.912 353.7755  475.9794
+##     median       uq      max neval
+##  1147.2635 1187.437 2161.006   100
+##   470.3565  496.774 2353.099   100
 ```
