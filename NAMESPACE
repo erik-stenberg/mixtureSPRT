@@ -2,10 +2,10 @@
 
 S3method(plot,mSPRT)
 S3method(print,mSPRT)
-export()
 export(calcTau)
 export(mSPRT)
 export(mSPRT.default)
+export(testing)
 importFrom(Rcpp,sourceCpp)
 importFrom(ggplot2,aes)
 importFrom(ggplot2,geom_hline)

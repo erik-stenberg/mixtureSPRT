@@ -10,6 +10,7 @@
 #' @param distribution The desired distribution.
 #' @param alpha Significance level
 #' @return The likelihood ratio
+#' @name testing
 #' @export
 NULL
 
