@@ -37,5 +37,5 @@ With Bernoulli data, the closed form solution is:
 }
 
 \references{
-\emph{Johari, R., Koomen, P., Pekelis, L. & Walsh, D. 2017, 'Peeking at A/B Tests: Why it matters, and what to do about it', ACM, , pp. 1517}
+Johari, R., Koomen, P., Pekelis, L. & Walsh, D. 2017, 'Peeking at A/B Tests: Why it matters, and what to do about it', ACM, , pp. 1517
 }
