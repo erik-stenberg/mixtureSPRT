@@ -6,7 +6,8 @@ mixtureSPRT is a package for performing mixture Sequential Probability Ratio tes
 - `calcTau()`
 - `mSPRT()`
 
-
+## Under development
+This package is under development. Functions will or may change.
 
 
 ## Installation
