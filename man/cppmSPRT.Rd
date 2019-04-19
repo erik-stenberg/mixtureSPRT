@@ -6,6 +6,8 @@
 \arguments{
 \item{x, y}{Numeric vectors}
 
+\item{xpre, ypre}{Numeric vectors}
+
 \item{sigma}{Population standard deviation}
 
 \item{tau}{Mixture variance}

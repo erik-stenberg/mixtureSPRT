@@ -1,6 +1,7 @@
 #' Calculate mixture Sequential Probability Ratio Test
 #'
 #' @param x,y Numeric vectors
+#' @param xpre,ypre Numeric vectors of pre-experiment data
 #' @param sigma Population standard deviation
 #' @param tau Mixture variance
 #' @param theta Hypothesised difference between \code{x} and \code{y}
@@ -17,6 +18,6 @@
 #' @export
 
 
-mSPRT <- function(x, y, sigma, tau, theta=0, distribution='normal', alpha=0.05, useCpp=F) {
+mSPRT <- function(x, y, xpre = NULL, ypre = NULL, sigma, tau, theta=0, distribution='normal', alpha=0.05, useCpp=F) {
     UseMethod("mSPRT")
   }

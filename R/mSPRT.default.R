@@ -1,6 +1,7 @@
 #' Perform mixture Sequential Probability Ratio Test
 #'
 #' @param x,y Numeric vectors
+#' @param xpre, ypre Numeric vectors of pre-experiment data
 #' @param sigma Population standard deviation
 #' @param tau Mixture variance
 #' @param theta Hypothesised difference between \code{x} and \code{y}
@@ -16,21 +17,21 @@ NULL
 
 
 # Validations ------------
-mSPRT.default <- function(x, y, sigma, tau, theta=0, distribution='normal', alpha=0.05, useCpp=F){
-  # x,y
-  is.numeric(x) & is.numeric(y) || stop("x and y must be numeric vectors")
+mSPRT.default <- function(x, y, xpre = NULL, ypre = NULL, sigma, tau, theta=0, distribution='normal', alpha=0.05, useCpp=F){
   !is.null(x) & !is.null(y) || stop("x and y cannot be empty")
   length(x) == length(y) || stop("x and y must be of same length")
+  burnIn = 100
   
-  if(!is.numeric(x) | !is.numeric(y)){
-    stop("x and y must be numerical vectors")
-  }
+  x <- tryCatch(expr = as.numeric(x),
+                warning = function(w) {
+                  message("x and y must be numerical vectors")
+                  stop()
+                })
   
   # sigma
   if(distribution=="normal"){
     is.numeric(sigma) || stop("sigma must be numeric")  
   }
-  
   
   # theta
   is.numeric(theta) || stop("theta must be numeric")
@@ -49,30 +50,39 @@ mSPRT.default <- function(x, y, sigma, tau, theta=0, distribution='normal', alph
   }
   
   
-  ###########
-  # FUNC #
-  ###########
+  ##################
+  
   n <- length(x)
   z <- x-y
   
-  ### Cpp 
+  ###################
+  ### CALC IN C++ ###
+  ###################
+  
   if(useCpp == T){
-    # Normal
+    
+    ### Normal ### 
+    
     if(distribution == "normal") {
+      
       out <- mixtureSPRT::cppmSPRT(x = x,
                                    y = y,
+                                   xpre = xpre,
+                                   ypre = ypre,
                                    sigma = sigma,
                                    tau = tau,
                                    theta = theta,
                                    distribution = distribution)
       
       
-      # Bernoulli
-    } else if (distribution == "bernoulli") {
-      Vn <- mean(y) * (1 - mean(y)) + mean(x) * (1-mean(x))
-      sigma = sqrt(Vn/2)
+      ### Bernoulli ###
+    
+      } else if (distribution == "bernoulli") {
+      
       out <- mixtureSPRT::cppmSPRT(x = x,
                                    y = y,
+                                   xpre = xpre,
+                                   ypre = ypre,
                                    sigma = sigma,
                                    tau = tau,
                                    theta = theta,
@@ -81,27 +91,55 @@ mSPRT.default <- function(x, y, sigma, tau, theta=0, distribution='normal', alph
       
     }
     
-  } else if(useCpp == F){
+  } 
+  
+  #################
+  ### CALC IN R ###
+  #################
+  
+  else if(useCpp == F){
     
     
+    ### Normal ###
     
-    #################
-    
-    out <- matrix(NA,length(z))
+    out <- matrix(NA,length(x))
     if(distribution == "normal"){
+      
       for(i in 1:length(z))
         out[i] <- sqrt((2*sigma^2)/(2*sigma^2 + i *tau^2)) * exp(((i)^2*tau^2*(mean(z[1:i]) - theta)^2) / (4*sigma^2*(2*sigma^2 + i*tau^2)))  
     }
     
+    
+    ### Bernoulli ###
+    
     if(distribution == "bernoulli"){
-      for(i in 1:length(z)){
-        Vn <- mean(x) * (1-mean(x)) + mean(y) * (1-mean(y))
-        out[i] <- sqrt((Vn)/(Vn + i*tau^2)) * exp(((i)^2*tau^2*(mean(z[1:i]) - theta)^2) / (2*Vn*(Vn + i*tau^2)))  
+      
+      if(!is.null(xpre) & !is.null(ypre)){
+
+        for(i in burnIn:length(x)){
+          k <- 0.5 * ((cov(xpre[1:i], x[1:i])/var(xpre[1:i])) + (cov(ypre[1:i], y[1:i])/var(ypre[1:i])))
+          
+          xn <- x[1:i] - k * xpre[1:i]
+          yn <- y[1:i] - k * ypre[1:i]
+          
+          Vn <- mean(xn[1:i]) * (1 - mean(xn[1:i]))  +   mean(yn[1:i]) * (1 - mean(yn[1:i]))
+          
+          out[i] <- sqrt((Vn)/(Vn + i*tau^2)) * exp(((i)^2*tau^2*(mean(xn[1:i])-mean(yn[1:i]) - theta)^2) / (2*Vn*(Vn + i*tau^2)))  
+        }
+      } else if( is.null(xpre) | is.null(ypre)){
+        
+        
+          for(i in burnIn:length(z)){
+          Vn <- mean(x[0:i]) * (1-mean(x[0:i])) + mean(y[0:i]) * (1-mean(y[0:i]))
+          out[i] <- sqrt((Vn)/(Vn + i*tau^2)) * exp(((i)^2*tau^2*(mean(z[1:i]) - theta)^2) / (2*Vn*(Vn + i*tau^2)))  
+        }
       }
+      out[1:burnIn] <- 1
+      out <- as.vector(out)
     }
-    out <- as.vector(out)
-    #################
   }
+  
+  #################
   
   
   ##########
@@ -110,19 +148,19 @@ mSPRT.default <- function(x, y, sigma, tau, theta=0, distribution='normal', alph
   
   
   # Decision and text
-  n.rejection <- if(max(out) > alpha^(-1)){
+  n.rejection <- if(max(out,na.rm = T) > alpha^(-1)){
     min(which(out>alpha^(-1)))
   }else{
     length(z)
   }
   
-  decision <- ifelse(n.rejection < length(z), paste0("Accept H1"), paste0("Accept H0"))
+  decision <- ifelse(n.rejection < length(x), paste0("Accept H1"), paste0("Accept H0"))
   text <- paste0("Decision made after ",n.rejection," observations were collected")
   
   
   output <- list(
     distribution = distribution,
-    n = length(z),
+    n = length(x),
     spr = out,
     n.rejection = n.rejection,
     decision = decision,

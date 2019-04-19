@@ -4,11 +4,13 @@
 \alias{mSPRT}
 \title{Calculate mixture Sequential Probability Ratio Test}
 \usage{
-mSPRT(x, y, sigma, tau, theta = 0, distribution = "normal",
-  alpha = 0.05, useCpp = F)
+mSPRT(x, y, xpre = NULL, ypre = NULL, sigma, tau, theta = 0,
+  distribution = "normal", alpha = 0.05, useCpp = F)
 }
 \arguments{
 \item{x, y}{Numeric vectors}
+
+\item{xpre, ypre}{Numeric vectors of pre-experiment data}
 
 \item{sigma}{Population standard deviation}
 

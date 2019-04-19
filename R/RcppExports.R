@@ -4,6 +4,7 @@
 #' Calculate mixture Sequential Probability Ratio Test in C++
 #'
 #' @param x,y Numeric vectors
+#' @param xpre,ypre Numeric vectors
 #' @param sigma Population standard deviation
 #' @param tau Mixture variance
 #' @param theta Hypothesised difference between \code{x} and \code{y}
@@ -14,7 +15,7 @@
 #' @export
 NULL
 
-cppmSPRT <- function(x, y, sigma, tau, theta = 0, distribution = "normal") {
-    .Call('_mixtureSPRT_cppmSPRT', PACKAGE = 'mixtureSPRT', x, y, sigma, tau, theta, distribution)
+cppmSPRT <- function(x, y, xpre, ypre, sigma, tau, theta = 0, distribution = "normal") {
+    .Call('_mixtureSPRT_cppmSPRT', PACKAGE = 'mixtureSPRT', x, y, xpre, ypre, sigma, tau, theta, distribution)
 }
 
