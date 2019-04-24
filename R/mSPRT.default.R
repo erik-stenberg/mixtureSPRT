@@ -112,8 +112,9 @@ mSPRT.default <- function(x, y, xpre = NULL, ypre = NULL, sigma, tau, theta=0, d
           
           xn <- x[1:i] - k * xpre[1:i]
           yn <- y[1:i] - k * ypre[1:i]
+          rho <- 0.5*(cor(x[1:i],xpre[1:i]) + cor(y[1:i],ypre[1:i]))
           
-          out[i] <- sqrt((2*sigma)/(2*sigma + i*tau^2)) * exp(((i)^2*tau^2*(mean(xn[1:i])-mean(yn[1:i]) - theta)^2) / (4*sigma*(2*sigma + i*tau^2)))  
+          out[i] <- sqrt((2*sigma^2*(1-rho^2))/(2*sigma^2*(1-rho^2) + i*tau^2)) * exp(((i)^2*tau^2*(mean(xn)-mean(yn) - theta)^2) / (4*sigma^2*(1-rho^2)*(2*sigma^2*(1-k^2) + i*tau^2)))  
           
         }
          out[1:burnIn] <- 0
@@ -121,7 +122,8 @@ mSPRT.default <- function(x, y, xpre = NULL, ypre = NULL, sigma, tau, theta=0, d
       } else if( is.null(xpre) | is.null(ypre)) {
         
         for(i in 1:length(z)){
-          out[i] <- sqrt((2*sigma^2)/(2*sigma^2 + i*tau^2)) * exp(((i)^2*tau^2*(mean(z[1:i]) - theta)^2) / (4*sigma^2*(2*sigma^2 + i*tau^2)))  
+          out[i] <- sqrt((2*sigma^2)/(2*sigma^2 + i*tau^2)) * exp(((i)^2*tau^2*(mean(x[1:i]) - mean(y[1:i]) - theta)^2) / (4*sigma^2*(2*sigma^2 + i*tau^2)))  
+
         }
       }
       

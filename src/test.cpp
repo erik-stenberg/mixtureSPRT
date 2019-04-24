@@ -95,8 +95,12 @@ NumericVector cppmSPRT(Rcpp::NumericVector x, Rcpp::NumericVector y, Nullable<Nu
 
         NumericVector xn = x[Range(0, i)] - k * xpre_n[Range(0, i)];
         NumericVector yn = y[Range(0, i)] - k * ypre_n[Range(0, i)];
-
-        out[i] = sqrt((2 * sigma) / (2 * sigma + (i + 1) * pow(tau, 2))) * exp((pow((i + 1), 2) * pow(tau, 2) * pow((mean(xn) - mean(yn) - theta), 2)) / (4 * sigma * (2 * sigma + (i + 1) * pow(tau, 2))));
+        
+        double rho =  0.5 * (covC(ypre_n[Rcpp::Range(0, (i))], y[Rcpp::Range(0, (i))])/sqrt(var(ypre_n[Rcpp::Range(0, (i))]) * var(y[Rcpp::Range(0, (i))])) + 
+                             covC(xpre_n[Rcpp::Range(0, (i))], x[Rcpp::Range(0, (i))])/sqrt(var(xpre_n[Rcpp::Range(0, (i))]) * var(x[Rcpp::Range(0, (i))])));
+                           
+                                                                                              
+        out[i] = sqrt((2 * pow(sigma,2)*(1-pow(rho,2))) / (2 * pow(sigma,2)*(1-pow(rho,2)) + (i + 1) * pow(tau, 2))) * exp((pow((i + 1), 2) * pow(tau, 2) * pow((mean(xn) - mean(yn) - theta), 2)) / (4 * pow(sigma,2)*(1-pow(rho,2)) * (2 * pow(sigma,2)*(1-pow(rho,2)) + (i + 1) * pow(tau, 2))));
       }
     }
 
