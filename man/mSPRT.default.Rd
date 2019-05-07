@@ -6,7 +6,7 @@
 \arguments{
 \item{x, y}{Numeric vectors}
 
-\item{xpre, }{ypre Numeric vectors of pre-experiment data}
+\item{xpre, ypre}{Numeric vectors of pre-experiment data}
 
 \item{sigma}{Population standard deviation}
 

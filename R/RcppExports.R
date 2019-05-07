@@ -4,7 +4,7 @@
 #' Calculate mixture Sequential Probability Ratio Test in C++
 #'
 #' @param x,y Numeric vectors
-#' @param xpre,ypre Numeric vectors
+#' @param xpre,ypre Numeric vectors of pre-experiment data
 #' @param sigma Population standard deviation
 #' @param tau Mixture variance
 #' @param theta Hypothesised difference between \code{x} and \code{y}

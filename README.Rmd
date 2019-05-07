@@ -1,3 +1,10 @@
+---
+title: "mixtureSPRT"
+output:
+  md_document:
+    variant: gfm
+---
+
 # mixtureSPRT
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -10,6 +17,7 @@ mixtureSPRT is a package for performing mixture Sequential Probability Ratio tes
 
 ```{r,echo=F, include=F}
 library(mixtureSPRT)
+library(tidyverse)
 ```
 
 
@@ -52,9 +60,49 @@ distribution="normal"
 alpha=0.05
 
 microbenchmark(
-  m <- mSPRT(x,y,sigma,tau,
+  m <- mSPRT(x,y,sigma=sigma,tau=tau,
                      useCpp = F),
-  mcpp <-  mSPRT(x,y,sigma,tau,
+  mcpp <-  mSPRT(x,y,sigma=sigma,tau=tau,
                          useCpp = T)
 )
 ```
+In case pre-experiment data is available, those can be included too as control variates in order to reduce the variance in the variable tested.
+
+```{r,message=F}
+library(MASS)
+set.seed(1337)
+rho=0.6 # Correlation between pre-experiment data and post-treatment data
+sigma = 1
+Sigma <- matrix(c(sigma^2,rho*sqrt(sigma^2*sigma^2),rho*sqrt(sigma^2*sigma^2),sigma^2),2,2) # covar.matrix to make sure correlation = rho
+n <- 1000 # Truncation point
+
+x <- mvrnorm(n = n, c(0,0.1), Sigma, empirical = T) %>% as.data.frame() # Treatment group
+y <- mvrnorm(n = n, c(0,0), Sigma, empirical = T) %>% as.data.frame() # Control group
+cor(x[,1],x[,2])
+cor(y[,1],y[,2])
+
+
+m1 <- mSPRT(x = x[,2],
+      y = y[,2],
+      xpre = x[,1],
+      ypre = y[,1],
+      sigma = sigma,
+      tau = calcTau(alpha = 0.05, truncation = n, sigma = 1),
+      theta = 0,
+      distribution = "normal",
+      alpha = 0.05,
+      useCpp = T)
+
+m2 <-  mSPRT(x = x[,2],
+      y = y[,2],
+      sigma = sigma,
+      tau = calcTau(alpha = 0.05, truncation = n, sigma = 1),
+      theta = 0,
+      distribution = "normal",
+      alpha = 0.05,
+      useCpp = T)
+
+gridExtra::grid.arrange(plot(m1),plot(m2))
+
+```
+
