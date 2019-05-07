@@ -1,7 +1,7 @@
 #' Perform mixture Sequential Probability Ratio Test
 #'
 #' @param x,y Numeric vectors
-#' @param xpre, ypre Numeric vectors of pre-experiment data
+#' @param xpre,ypre Numeric vectors of pre-experiment data
 #' @param sigma Population standard deviation
 #' @param tau Mixture variance
 #' @param theta Hypothesised difference between \code{x} and \code{y}
@@ -114,7 +114,7 @@ mSPRT.default <- function(x, y, xpre = NULL, ypre = NULL, sigma, tau, theta=0, d
           yn <- y[1:i] - k * ypre[1:i]
           rho <- 0.5*(cor(x[1:i],xpre[1:i]) + cor(y[1:i],ypre[1:i]))
           
-          out[i] <- sqrt((2*sigma^2*(1-rho^2))/(2*sigma^2*(1-rho^2) + i*tau^2)) * exp(((i)^2*tau^2*(mean(xn)-mean(yn) - theta)^2) / (4*sigma^2*(1-rho^2)*(2*sigma^2*(1-k^2) + i*tau^2)))  
+          out[i] <- sqrt((2*sigma^2*(1-rho^2))/(2*sigma^2*(1-rho^2) + i*tau^2)) * exp(((i)^2*tau^2*(mean(xn)-mean(yn) - theta)^2) / (4*sigma^2*(1-rho^2)*(2*sigma^2*(1-k^2) + i*tau^2)))
           
         }
          out[1:burnIn] <- 0
