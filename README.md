@@ -14,7 +14,7 @@ to other tests.
 ## Installation
 
 ``` r
-devtools::install_github("shitoushan/mixtureSPRT")
+devtools::install_github("erik-stenberg/mixtureSPRT")
 ```
 
 ## Usage
