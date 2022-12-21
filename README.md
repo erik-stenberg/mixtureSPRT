@@ -22,7 +22,7 @@ devtools::install_github("erik-stenberg/mixtureSPRT")
 ``` r
     set.seed(1337)
      n <- 10000
-     m <- mSPRT(x = rnorm(n),
+     m <- mSPRT.default(x = rnorm(n),
            y = rnorm(n, mean = 0.05),
            sigma = 1,
            tau =  calcTau(alpha = 0.05, sigma = 1, truncation = n),
